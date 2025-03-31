@@ -113,7 +113,7 @@ export default function Home() {
     // Reemplaza los guiones por viñetas y asegura el formato correcto
     return content
       .split("\n")
-      .map((line, index) => {
+      .map((line) => {
         // Si la línea comienza con un guion, reemplázalo con una viñeta
         if (line.trim().startsWith("-")) {
           return line.replace(/^\s*-\s*/, "• ");
