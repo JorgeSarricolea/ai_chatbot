@@ -13,6 +13,27 @@ export interface Intent {
   }[];
 }
 
+// Definir interfaces para los tipos
+interface ResponseData {
+  latest_releases?: Array<{
+    game: string;
+    platform: string;
+    price: number;
+  }>;
+  msi_minimum?: number;
+  msi_options?: number[];
+  support_contact?: string;
+  preorder_deposit?: string;
+  delivery_time?: string;
+  free_shipping_minimum?: number;
+  tracking_available?: boolean;
+}
+
+interface Response {
+  template: string;
+  data?: ResponseData;
+}
+
 export const CHATBOT_CONFIG = {
   intents: {
     product_inquiry: {
@@ -98,9 +119,9 @@ export const CHATBOT_CONFIG = {
           data: {
             msi_minimum: 999,
             msi_options: [3, 6, 12],
-          },
+          } as ResponseData,
         },
-      ],
+      ] as Response[],
     },
 
     customer_service: {
