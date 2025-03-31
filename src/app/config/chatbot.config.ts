@@ -1,19 +1,9 @@
-export interface Entity {
+// Definir todas las interfaces necesarias
+interface Entity {
   name: string;
   values: string[];
 }
 
-export interface Intent {
-  name: string;
-  entities: Entity[];
-  examples: string[];
-  responses: {
-    template: string;
-    data?: Record<string, any>;
-  }[];
-}
-
-// Definir interfaces para los tipos
 interface ResponseData {
   latest_releases?: Array<{
     game: string;
@@ -27,6 +17,17 @@ interface ResponseData {
   delivery_time?: string;
   free_shipping_minimum?: number;
   tracking_available?: boolean;
+  whatsapp?: string;
+  email?: string;
+  hours?: string;
+  status?: string;
+  quantity?: number;
+  restock_date?: string;
+  platforms?: string;
+  price?: number;
+  msi?: string;
+  step1?: string;
+  step2?: string;
 }
 
 interface Response {
@@ -34,7 +35,29 @@ interface Response {
   data?: ResponseData;
 }
 
-export const CHATBOT_CONFIG = {
+interface Intent {
+  name: string;
+  entities: Entity[];
+  examples: string[];
+  responses: Response[];
+}
+
+interface ChatbotConfig {
+  intents: {
+    product_inquiry: Intent;
+    price_inquiry: Intent;
+    customer_service: Intent;
+    technical_support: Intent;
+    stock_availability: Intent;
+    order_shipping: Intent;
+  };
+  defaultResponse: {
+    template: string;
+    suggestion: string;
+  };
+}
+
+export const CHATBOT_CONFIG: ChatbotConfig = {
   intents: {
     product_inquiry: {
       name: "Consulta de Productos",
