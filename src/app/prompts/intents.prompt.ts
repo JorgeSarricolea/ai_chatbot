@@ -1,7 +1,7 @@
 export const INTENTS = {
   products_info: {
     description:
-      "Proporciona información detallada sobre los videojuegos disponibles en la tienda, incluyendo el título del juego, la plataforma en la que está disponible, la edición del juego y la categoría de venta (nuevos lanzamientos, más vendidos o en oferta).",
+      "Provides detailed information about video games available in the store, including game title, platform availability, game edition, and sales category (new releases, best sellers, or on sale).",
     entities: {
       game_title: [
         "Final Fantasy XVI",
@@ -10,47 +10,43 @@ export const INTENTS = {
         "Resident Evil 4",
       ],
       platform: ["PS5", "Xbox Series X", "Nintendo Switch", "PC"],
-      edition: ["Standard", "Deluxe", "Collector’s"],
-      category: ["Nuevos lanzamientos", "Más vendidos", "En oferta"],
+      edition: ["Standard", "Deluxe", "Collector's"],
+      category: ["New Releases", "Best Sellers", "On Sale"],
     },
   },
   price_inquiry: {
     description:
-      "Ofrece información específica sobre el precio de un videojuego seleccionado, incluyendo si el precio es el normal, está en oferta o disponible para compra a meses sin intereses (MSI). También informa sobre los métodos de pago aceptados.",
+      "Offers specific information about the price of a selected video game, including whether the price is regular, on sale, or available for installment payments (ISP). Also informs about accepted payment methods.",
     entities: {
       game_title: [
         "Final Fantasy XVI",
         "Call of Duty: Modern Warfare II",
         "The Legend of Zelda: Tears of the Kingdom",
       ],
-      price_type: ["Precio normal", "Precio de oferta", "MSI"],
-      payment_method: [
-        "Tarjeta de crédito",
-        "PayPal",
-        "Transferencia bancaria",
-      ],
+      price_type: ["Regular Price", "Sale Price", "ISP"],
+      payment_method: ["Credit Card", "PayPal", "Bank Transfer"],
     },
   },
   customer_service: {
     description:
-      "Brinda información sobre cómo contactar al servicio de atención al cliente, especificando los tipos de contacto disponibles, ubicaciones de atención y los horarios en los que se puede contactar.",
+      "Provides information about how to contact customer service, specifying available contact types, service locations, and hours of operation.",
     entities: {
-      contact_type: ["WhatsApp", "Email", "Teléfono"],
-      location: ["Centro comercial Galerías", "Plaza Satélite"],
+      contact_type: ["WhatsApp", "Email", "Phone"],
+      location: ["Galerias Mall", "Plaza Satelite"],
       schedule: [
-        "Lunes a Viernes de 9:00 a 21:00",
-        "Sábados y Domingos de 11:00 a 18:00",
+        "Monday to Friday 9:00 AM to 9:00 PM",
+        "Saturday and Sunday 11:00 AM to 6:00 PM",
       ],
     },
   },
   technical_support: {
     description:
-      "Asiste en la resolución de problemas técnicos relacionados con los productos vendidos, como problemas con códigos de juegos, acceso a cuentas de usuario o errores durante la instalación de un juego en diferentes plataformas.",
+      "Assists in resolving technical issues related to sold products, such as problems with game codes, user account access, or errors during game installation on different platforms.",
     entities: {
       issue_type: [
-        "Problema con código de juego",
-        "Problema de acceso a cuenta",
-        "Fallas durante la instalación",
+        "Game code issue",
+        "Account access problem",
+        "Installation failures",
       ],
       game_title: [
         "Final Fantasy XVI",
@@ -62,27 +58,27 @@ export const INTENTS = {
   },
   stock_info: {
     description:
-      "Informa sobre la disponibilidad actual de un juego específico en la tienda, indicando si el juego está en stock, agotado o cuándo estará disponible nuevamente.",
+      "Reports on the current availability of a specific game in the store, indicating whether the game is in stock, out of stock, or when it will be available again.",
     entities: {
       game_title: [
         "Final Fantasy XVI",
         "Call of Duty: Modern Warfare II",
         "The Legend of Zelda: Tears of the Kingdom",
       ],
-      availability: ["En stock", "Agotado", "Próximamente disponible"],
-      restock_date: ["15 de abril de 2025", "1 de mayo de 2025"],
+      availability: ["In Stock", "Out of Stock", "Coming Soon"],
+      restock_date: ["April 15, 2025", "May 1, 2025"],
     },
   },
   shipping_info: {
     description:
-      "Proporciona detalles sobre el proceso de envío para los pedidos, incluyendo el tiempo estimado de entrega, el costo de envío y el estado actual del pedido.",
+      "Provides details about the shipping process for orders, including estimated delivery time, shipping cost, and current order status.",
     entities: {
-      delivery_time: ["2-5 días hábiles", "Entrega inmediata en 24 horas"],
+      delivery_time: ["2-5 business days", "24-hour immediate delivery"],
       shipping_cost: [
-        "Gratis en compras mayores a $999",
-        "$50 en compras menores a $999",
+        "Free for purchases over $999",
+        "$50 for purchases under $999",
       ],
-      order_status: ["Pedido pendiente", "Pedido enviado", "Pedido entregado"],
+      order_status: ["Order Pending", "Order Shipped", "Order Delivered"],
     },
   },
 };
