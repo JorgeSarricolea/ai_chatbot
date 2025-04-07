@@ -17,7 +17,7 @@ export async function POST(request: Request) {
       body: JSON.stringify({
         message: message,
         model: "command",
-        temperature: 0.3,
+        temperature: 1,
         max_tokens: 100,
         chat_history: INITIAL_PROMPT,
       }),
@@ -27,13 +27,13 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       text: {
-        message: data.text || "No se pudo obtener una respuesta",
+        message: data.text || "Could not get a response",
       },
     });
   } catch (error) {
-    console.error("Error en la API de Cohere:", error);
+    console.error("Error in Cohere API:", error);
     return NextResponse.json(
-      { error: "Error al procesar la solicitud" },
+      { error: "Error processing request" },
       { status: 500 }
     );
   }
