@@ -2,73 +2,35 @@
 
 import { useState } from "react";
 
-// Definir las traducciones
+// Define translations
 const translations = {
-  es: {
-    title: "Asistente de Tienda de Videojuegos",
-    greeting:
-      "👋 ¡Hola! Soy tu asistente de videojuegos. ¿En qué puedo ayudarte?\n\nPuedes consultar sobre nuestros productos, precios, servicio al cliente y más.",
-    placeholder: "Escribe tu pregunta aquí...",
-    sendButton: "Enviar",
-    loading: "Escribiendo...",
-    error:
-      "Lo siento, hubo un error al procesar tu mensaje. Por favor, intenta de nuevo.",
-    menuOptions: [
-      { icon: "🎮", text: "Productos y Juegos" },
-      { icon: "💰", text: "Precios y Pagos" },
-      { icon: "👥", text: "Atención al Cliente" },
-      { icon: "🛠️", text: "Soporte Técnico" },
-      { icon: "📦", text: "Stock y Disponibilidad" },
-      { icon: "🚚", text: "Envíos y Pedidos" },
-    ],
-  },
-  en: {
-    title: "Video Game Store Assistant",
-    greeting:
-      "👋 Hi! I'm your gaming assistant. How can I help you?\n\nYou can ask about our products, prices, customer service and more.",
-    placeholder: "Type your question here...",
-    sendButton: "Send",
-    loading: "Typing...",
-    error:
-      "Sorry, there was an error processing your message. Please try again.",
-    menuOptions: [
-      { icon: "🎮", text: "Products & Games" },
-      { icon: "💰", text: "Prices & Payments" },
-      { icon: "👥", text: "Customer Service" },
-      { icon: "🛠️", text: "Technical Support" },
-      { icon: "📦", text: "Stock & Availability" },
-      { icon: "🚚", text: "Shipping & Orders" },
-    ],
-  },
+  title: "GameBot",
+  greeting: "👋 Hi! I'm GameBot. How can I help you?",
+  placeholder: "Type your question here...",
+  sendButton: "Send",
+  loading: "Typing...",
+  error: "Sorry, there was an error processing your message. Please try again.",
+  menuOptions: [
+    { icon: "🎮", text: "Products & Games" },
+    { icon: "💰", text: "Prices & Payments" },
+    { icon: "👥", text: "Customer Service" },
+    { icon: "🛠️", text: "Technical Support" },
+    { icon: "📦", text: "Stock & Availability" },
+    { icon: "🚚", text: "Shipping & Orders" },
+  ],
 };
 
 export default function Home() {
-  const [language, setLanguage] = useState<"es" | "en">("es");
   const [messages, setMessages] = useState<{ role: string; content: string }[]>(
     [
       {
         role: "bot",
-        content: translations[language].greeting,
+        content: translations.greeting,
       },
     ]
   );
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  // Obtener las traducciones actuales basadas en el idioma seleccionado
-  const t = translations[language];
-
-  const toggleLanguage = () => {
-    const newLanguage = language === "es" ? "en" : "es";
-    setLanguage(newLanguage);
-    // Actualizar el mensaje de bienvenida
-    setMessages([
-      {
-        role: "bot",
-        content: translations[newLanguage].greeting,
-      },
-    ]);
-  };
 
   const sendMessage = async (message: string) => {
     if (!message.trim() || isLoading) return;
@@ -90,7 +52,7 @@ export default function Home() {
       const botMessage = {
         role: "bot",
         content:
-          data.text?.message || "Lo siento, hubo un error en mi respuesta.",
+          data.text?.message || "Sorry, there was an error in my response.",
       };
 
       setMessages((prev) => [...prev, botMessage]);
@@ -100,8 +62,7 @@ export default function Home() {
         ...prev,
         {
           role: "bot",
-          content:
-            "Lo siento, hubo un error al procesar tu mensaje. Por favor, intenta de nuevo.",
+          content: translations.error,
         },
       ]);
     } finally {
@@ -110,11 +71,9 @@ export default function Home() {
   };
 
   const formatMessage = (content: string) => {
-    // Reemplaza los guiones por viñetas y asegura el formato correcto
     return content
       .split("\n")
       .map((line) => {
-        // Si la línea comienza con un guion, reemplázalo con una viñeta
         if (line.trim().startsWith("-")) {
           return line.replace(/^\s*-\s*/, "• ");
         }
@@ -126,19 +85,11 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center bg-gradient-to-b from-purple-50 to-white p-4">
       <div className="w-full max-w-3xl bg-white rounded-xl shadow-lg p-6">
-        {/* Header con título y botón de idioma */}
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-purple-800 text-center flex-1">
-            {t.title}
+        {/* Header */}
+        <div className="flex justify-center items-center mb-6">
+          <h1 className="text-3xl font-bold text-purple-800 text-center">
+            {translations.title}
           </h1>
-          <button
-            onClick={toggleLanguage}
-            className="px-4 py-2 bg-purple-100 hover:bg-purple-200 text-purple-800 rounded-lg
-                     transition-colors duration-200 flex items-center gap-2"
-          >
-            <span>{language.toUpperCase()}</span>
-            <span className="text-sm">{language === "es" ? "🇪🇸" : "🇺🇸"}</span>
-          </button>
         </div>
 
         {/* Chat container */}
@@ -174,7 +125,7 @@ export default function Home() {
           {isLoading && (
             <div className="flex justify-start">
               <div className="bg-gray-200 text-gray-800 p-3 rounded-lg rounded-bl-none">
-                {t.loading}
+                {translations.loading}
               </div>
             </div>
           )}
@@ -182,7 +133,7 @@ export default function Home() {
 
         {/* Menu buttons */}
         <div className="grid grid-cols-2 gap-2 mb-6">
-          {t.menuOptions.map(({ icon, text }) => (
+          {translations.menuOptions.map(({ icon, text }) => (
             <button
               key={text}
               onClick={() => sendMessage(`${icon} ${text}`)}
@@ -202,7 +153,7 @@ export default function Home() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && sendMessage(input)}
-            placeholder={t.placeholder}
+            placeholder={translations.placeholder}
             className="flex-1 p-3 text-black border border-gray-300 rounded-lg focus:outline-none
                        focus:ring-2 focus:ring-purple-500 focus:border-transparent"
             disabled={isLoading}
@@ -213,7 +164,7 @@ export default function Home() {
             className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg
                      transition-colors duration-200 disabled:bg-purple-400"
           >
-            {t.sendButton}
+            {translations.sendButton}
           </button>
         </div>
       </div>
